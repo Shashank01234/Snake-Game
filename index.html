@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake Eater Deluxe — Multi-User</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Intro / Home Screen -->
+  <section id="intro" class="screen active">
+    <canvas id="introCanvas" width="960" height="600"></canvas>
+
+    <div class="intro-content">
+      <h1>🐍 Snake Eater</h1>
+      <p class="subtitle">Modern snake with accounts, stats, and traps</p>
+
+      <!-- Auth / Accounts -->
+      <div class="auth">
+        <div class="row">
+          <label for="userSelect">Current Player</label>
+          <select id="userSelect"></select>
+          <button id="switchUserBtn" class="btn small">Switch</button>
+          <button id="deleteUserBtn" class="btn small ghost">Delete</button>
+        </div>
+        <div class="row">
+          <label for="newUserName">New Player</label>
+          <input id="newUserName" placeholder="Enter username" maxlength="24"/>
+          <button id="createUserBtn" class="btn small primary">Create</button>
+        </div>
+        <div class="auth-hint" id="authHint"></div>
+      </div>
+
+      <!-- Game Options -->
+      
+
+        <div class="controls">
+            <div class="row">
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty">
+                <option value="Easy">Easy</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hard">Hard</option>
+                <option value="Harder">Harder</option>
+                <option value="Impossible">Impossible</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label class="checkbox">
+                <input type="checkbox" id="enableObstacles"/>
+                Enable Obstacles
+                </label>
+            </div>
+
+            <!-- New obstacle selection row -->
+            <div id="obstacleSelectRow" class="row hidden">
+                <label for="obstacleType">Obstacle Type</label>
+                <select id="obstacleType">
+                <option value="random">Random</option>
+                <option value="staticWalls">Static Walls</option>
+                <option value="movingBars">Moving Bars</option>
+                <option value="rotatingGates">Rotating Gates</option>
+                <option value="fakeFoodTraps">Fake-Food Traps</option>
+                <option value="diagonalWalls">Diagonal Walls</option>
+                <option value="portalPairs">Portal Pairs</option>
+                <option value="spiralWalls">Spiral Walls</option>
+                <option value="clusterBlocks">Cluster Blocks</option>
+                <option value="mazePattern">Maze Pattern</option>
+                </select>
+                <button id="randomObstacleBtn" class="btn small">Random</button>
+            </div>
+
+
+      </div>
+
+      <div class="buttons">
+        <button id="playBtn" class="btn primary">Play</button>
+        <button id="statsBtn" class="btn ghost">Stats</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Game Screen -->
+  <section id="game" class="screen">
+    <div class="hud">
+      <div class="left">
+        <span id="hudUser">Player: —</span>
+        <span id="hudDifficulty">Medium</span>
+        <span id="hudMode">Obstacles: Off</span>
+      </div>
+      <div class="center">Score: <span id="hudScore">0</span></div>
+      <div class="right">
+        <button id="pauseBtn" class="btn small">Pause</button>
+        <button id="quitBtn" class="btn small ghost">Quit</button>
+      </div>
+    </div>
+    <canvas id="gameCanvas" width="960" height="600"></canvas>
+  </section>
+
+  <!-- Game Over Modal -->
+  <div id="gameOverModal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Game Over</h2>
+      <p>Final Score: <span id="finalScore">0</span></p>
+      <div class="modal-actions">
+        <button id="restartBtn" class="btn primary">Play Again</button>
+        <button id="goHomeBtn" class="btn ghost">Home</button>
+        <button id="openStatsBtn" class="btn ghost">View Stats</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Screen -->
+  <section id="stats" class="screen">
+    <div class="stats-container">
+      <div class="stats-header">
+        <h2>📊 Player Stats</h2>
+        <div class="stats-user">
+          <span>Current Player: <strong id="statsUser">—</strong></span>
+          <button id="backHomeBtn" class="btn small ghost">Back</button>
+        </div>
+      </div>
+
+      <div id="aggregateStats" class="cards"></div>
+
+      <div class="chart-area">
+        <div class="chart-controls">
+          <label for="statsDifficulty">Difficulty</label>
+          <select id="statsDifficulty">
+            <option value="Easy">Easy</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="Hard">Hard</option>
+            <option value="Harder">Harder</option>
+            <option value="Impossible">Impossible</option>
+          </select>
+        </div>
+        <canvas id="statsChart" width="900" height="360"></canvas>
+      </div>
+
+      <div id="historyList" class="history"></div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
